@@ -1,0 +1,25 @@
+[build-system]
+requires = ["setuptools>=69", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "secure-backup"
+version = "0.1.0"
+description = "Production-grade hybrid encryption for backup files"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+  "cryptography>=49.0.0",
+]
+
+[project.scripts]
+secure-backup-generate-keys = "generate_keys:main"
+secure-backup-encrypt = "encrypt:main"
+secure-backup-decrypt = "decrypt:main"
+
+[tool.setuptools]
+py-modules = ["generate_keys", "encrypt", "decrypt"]
+
+[tool.setuptools.packages.find]
+include = ["crypto*", "services*", "utils*", "tests*"]
+exclude = ["tests*"]

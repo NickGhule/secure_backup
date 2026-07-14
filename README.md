@@ -40,17 +40,23 @@ Security assumptions:
 ## Installation
 
 ```bash
-python -m pip install -r requirements.txt
+python -m pip install .
 ```
 
 Python 3.12 or newer is recommended.
+
+For local development, you can also install the test dependencies first:
+
+```bash
+python -m pip install -r requirements.txt
+```
 
 ## Key Management
 
 Generate an encrypted RSA key pair:
 
 ```bash
-python generate_keys.py --output keys/
+secure-backup-generate-keys --output keys/
 ```
 
 This writes:
@@ -65,13 +71,13 @@ The private key is serialized as PKCS8 and encrypted with `BestAvailableEncrypti
 Encrypt a file:
 
 ```bash
-python encrypt.py --input backup.zip --public-key keys/public.pem --output backup.secure
+secure-backup-encrypt --input backup.zip --public-key keys/public.pem --output backup.secure
 ```
 
 Decrypt a file:
 
 ```bash
-python decrypt.py --input backup.secure --private-key keys/private.pem --output backup.zip
+secure-backup-decrypt --input backup.secure --private-key keys/private.pem --output backup.zip
 ```
 
 ## CLI Reference
@@ -179,6 +185,7 @@ No. The generated private key is always encrypted with a passphrase.
 Run the test suite:
 
 ```bash
+python -m pip install -r requirements.txt
 pytest
 ```
 
